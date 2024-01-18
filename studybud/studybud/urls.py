@@ -16,11 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('base.urls')),
     path('api/', include('base.api.urls'))
 ]
+
+#using append to add to the former url
+# settings.MEDIA_URL = /images/ in the settings.py
+#get the file from settings.MEDIA_ROOT
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
